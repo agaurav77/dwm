@@ -2,11 +2,12 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Inconsolata:size=10.5",
-    "VL Gothic:size=10.5",
+    "Monaco:size=8",
+    "VL Gothic:size=10.5",  
     "WenQuanYi Micro Hei:size=10.5",
 };
-static const char dmenufont[] = "-*-fixed-*-*-*-*-13-*-*-*-*-*-*-*";
+//static const char dmenufont[] = "-*-lucida-medium-r-*-*-11-*-*-*-*-*-*-*";
+static const char dmenufont[] = "Monaco:size=8";
 static const char normbordercolor[] = "#4d4d4d";
 static const char normbgcolor[]     = "#2d2d2d";
 static const char normfgcolor[]     = "#bbbbbb";
@@ -19,7 +20,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "stuff", "open-source", "term" };
+static const char *tags[] = { "net", "prog", "study", "extra"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -27,7 +28,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
+	{ "Gimp",     NULL,       NULL,       0,            False,        -1 },
 };
 
 /* layout(s) */
@@ -55,7 +56,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
 static const char *fmcmd[] = {"pcmanfm", NULL};
 static const char *chromecmd[] = {"google-chrome", NULL};
@@ -80,6 +81,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ Mod4Mask,                     XK_space,  spawn,          {.v = dmenucmd} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -91,6 +93,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
+	TAGKEYS(                        XK_4,                      3)
+//	TAGKEYS(                        XK_5,                      4)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
