@@ -49,3 +49,8 @@ Configuration
 -------------
 The configuration of dwm is done by creating a custom config.h
 and (re)compiling the source code.
+
+Added Patches to this dwm (by agaurav77)
+----------------------------------------
+
+* Status Bar
