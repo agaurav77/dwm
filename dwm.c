@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -1139,6 +1140,11 @@ manage(Window w, XWindowAttributes *wa) {
 	c->w = c->oldw = wa->width;
 	c->h = c->oldh = wa->height;
 	c->oldbw = wa->border_width;
+
+	/* randomise floating windows */
+	srand(time(NULL));
+	c->x = (50+(rand()%(1001-100))*(c->mon->mw - WIDTH(c)))/1000;
+	c->y = (50+(rand()%(1001-100))*(c->mon->mh - HEIGHT(c)))/1000;
 
 	if(c->x + WIDTH(c) > c->mon->mx + c->mon->mw)
 		c->x = c->mon->mx + c->mon->mw - WIDTH(c);
