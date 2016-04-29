@@ -2,16 +2,16 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Monaco:size=8",
+    "Fira Mono:size=8",
     "VL Gothic:size=10.5",  
     "WenQuanYi Micro Hei:size=10.5",
 };
 //static const char dmenufont[] = "-*-lucida-medium-r-*-*-11-*-*-*-*-*-*-*";
-static const char dmenufont[] = "Monaco:size=8";
-static const char normbordercolor[] = "#4d4d4d";
+static const char dmenufont[] = "Fira Mono:size=8";
+static const char normbordercolor[] = "#2d2d2d";
 static const char normbgcolor[]     = "#2d2d2d";
 static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#2d2d2d";
+static const char selbordercolor[]  = "#4d4d4d";
 static const char selbgcolor[]      = "#2d2d2d";
 static const char selfgcolor[]      = "#ffffff";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -20,7 +20,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "net", "prog", "study", "extra"};
+static const char *tags[] = { "dc", "chrome", "vid", "work", "else"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -29,6 +29,12 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            False,        -1 },
+  { "Main.py",  NULL,       NULL,       0,            True,         -1 },
+  { "google-chrome-unstable",
+                NULL,       NULL,       1<<1,         False,        -1 },
+  { "Linuxdcpp",NULL,       NULL,       1<<0,         False,        -1 },
+  { "Vlc",      NULL,       NULL,       1<<2,         True,         -1 },
+  { "Lyx",      NULL,       NULL,       1<<3,         False,        -1 }
 };
 
 /* layout(s) */
@@ -38,9 +44,9 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[t]",      tile },    /* first entry is default */
-	{ "[f]",      NULL },    /* no layout function means floating behavior */
-	{ "[m]",      monocle },
+	{ "<tiled>",      tile },    /* first entry is default */
+	{ "<float>",      NULL },    /* no layout function means floating behavior */
+	{ "<full>",      monocle },
 };
 
 /* key definitions */
@@ -58,7 +64,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
-static const char *fmcmd[] = {"pcmanfm", NULL};
+static const char *fmcmd[] = {"spacefm", NULL};
 static const char *chromecmd[] = {"google-chrome", NULL};
 static const char *dccmd[] = {"linuxdcpp", NULL};
 
@@ -94,7 +100,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
-//	TAGKEYS(                        XK_5,                      4)
+	TAGKEYS(                        XK_5,                      4)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
