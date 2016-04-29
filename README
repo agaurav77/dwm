@@ -53,6 +53,7 @@ and (re)compiling the source code.
 Added Patches to this dwm (by agaurav77)
 ----------------------------------------
 
-* Status Bar
+* System Tray
 * Randomised launch in floating mode (self patch)
 * barM code from website
+* Status Bar Colors

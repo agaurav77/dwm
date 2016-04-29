@@ -6,14 +6,14 @@ static const char *fonts[] = {
     "VL Gothic:size=10.5",  
     "WenQuanYi Micro Hei:size=10.5",
 };
+#define NUMCOLORS         2
+static const char colors[NUMCOLORS][MAXCOLORS][8] = {
+  // border     foreground   background
+  { "#2d2d2d", "#bbbbbb",   "#2d2d2d" },  // normal
+  { "#4d4d4d", "#ffffff",   "#2d2d2d" },  // selected
+};
 //static const char dmenufont[] = "-*-lucida-medium-r-*-*-11-*-*-*-*-*-*-*";
 static const char dmenufont[] = "Fira Mono:size=8";
-static const char normbordercolor[] = "#2d2d2d";
-static const char normbgcolor[]     = "#2d2d2d";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#4d4d4d";
-static const char selbgcolor[]      = "#2d2d2d";
-static const char selfgcolor[]      = "#ffffff";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
