@@ -32,7 +32,7 @@
  */
 
 #define VERSION "0.12"
-#define TIME_FORMAT "%H:%M) (%d-%m-%Y"
+#define TIME_FORMAT "%H:%M] [%d-%m-%Y"
 #define MAXSTR  1024
 
 static const char * date(void);
@@ -52,8 +52,8 @@ int main(void){
         if(uname(&u)){
                 perror("uname failed");
                 return 1;
-        }
-        ret=snprintf(status,sizeof(status),"(%s %s %s) ",u.sysname,u.nodename,u.release);}
+        }}
+        //ret=snprintf(status,sizeof(status),"(%s %s %s) ",u.sysname,u.nodename,u.release);}
         char*off=status+ret;
         if(off>=(status+MAXSTR)){
                 XSetRoot(status);
@@ -63,7 +63,7 @@ int main(void){
                 int left=sizeof(status)-ret,i;
                 char*sta=off;
                 for(i = 0; i<sizeof(functab)/sizeof(functab[0]); ++i ) {
-                        int ret=snprintf(sta,left,"(%s) ",functab[i]());
+                        int ret=snprintf(sta,left,"[%s] ",functab[i]());
                         sta+=ret;
                         left-=ret;
                         if(sta>=(status+MAXSTR))/*When snprintf has to resort to truncating a string it will return the length as if it were not truncated.*/
@@ -85,11 +85,17 @@ static const char * date(void){
 }
 /* Returns a string that contains the amount of free and available ram in megabytes*/
 static const char * ram(void){
-        static char ram[MAXSTR];
-        struct sysinfo s;
-        sysinfo(&s);
-        snprintf(ram,sizeof(ram),"%.1fM,%.1fM",((double)(s.totalram-s.freeram))/1048576.,((double)s.totalram)/1048576.);
-        return ram;
+  FILE *meminfo = fopen("/proc/meminfo", "r");
+  int totalMemory = 0, freeMem = 0;
+  char buff[256];
+  while(fgets(buff, sizeof(buff), meminfo)) {
+    int ramKB;
+    if (sscanf(buff, "MemFree: %d kB", &freeMem) == 1) freeMem /= 1024;
+    if (sscanf(buff, "MemTotal: %d kB", &totalMemory) == 1) totalMemory /= 1024;
+  }
+  static char ram[MAXSTR];
+  snprintf(ram, sizeof(ram), "%dM %dM", totalMemory-freeMem, totalMemory);
+  return ram;
 }
 
 static void XSetRoot(const char *name){
@@ -105,4 +111,3 @@ static void XSetRoot(const char *name){
 
         XCloseDisplay(display);
 }
-

@@ -2,7 +2,7 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Fira Mono:size=8",
+    "Fira Sans SemiBold:size=7.5",
     "VL Gothic:size=10.5",  
     "WenQuanYi Micro Hei:size=10.5",
 };
@@ -12,8 +12,7 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
   { "#2d2d2d", "#bbbbbb",   "#2d2d2d" },  // normal
   { "#4d4d4d", "#ffffff",   "#2d2d2d" },  // selected
 };
-//static const char dmenufont[] = "-*-lucida-medium-r-*-*-11-*-*-*-*-*-*-*";
-static const char dmenufont[] = "Fira Mono:size=8";
+static const char dmenufont[] = "Fira Sans SemiBold:size=7.5";
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -49,8 +48,8 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "<tiled>",      tile },    /* first entry is default */
 	{ "<float>",      NULL },    /* no layout function means floating behavior */
+  { "<tiled>",      tile },    /* first entry is default */
 	{ "<full>",      monocle },
 };
 
@@ -69,7 +68,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
-static const char *fmcmd[] = {"spacefm", NULL};
+static const char *fmcmd[] = {"urxvt", "-e", "/bin/sh", "-c", "ranger", NULL};
 static const char *chromecmd[] = {"google-chrome", NULL};
 static const char *dccmd[] = {"linuxdcpp", NULL};
 
@@ -89,8 +88,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ Mod4Mask,                     XK_space,  spawn,          {.v = dmenucmd} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
