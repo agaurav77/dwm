@@ -2,18 +2,21 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Fira Sans SemiBold:size=7.5",
+    "Cantarell:size=9"
+    "Carrois Gothic:size=11",
+    "Lucida Grande:size=8",
+    "Inconsolata:size=9",
     "VL Gothic:size=10.5",  
     "WenQuanYi Micro Hei:size=10.5",
 };
 #define NUMCOLORS         2
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
   // border     foreground   background
-  { "#2d2d2d", "#bbbbbb",   "#2d2d2d" },  // normal
-  { "#4d4d4d", "#ffffff",   "#2d2d2d" },  // selected
+  { "#2d2d2d", "#ffffff",   "#433a24" },  // normal
+  { "#4d4d4d", "#ffffff",   "#534a33" },  // selected
 };
-static const char dmenufont[] = "Fira Sans SemiBold:size=7.5";
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const char dmenufont[] = "Cantarell:size=9";
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
@@ -24,7 +27,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "dc", "chrome", "vid", "work", "else"};
+static const char *tags[] = {"dwld", "www", "vid", "dev", "<3"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -33,11 +36,17 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            False,        -1 },
+  { "Firefox",  NULL,       NULL,       1<<1,         False,        -1 },
+  { "Navigator", 
+                NULL,       NULL,       1<<1,         False,        -1 },
   { "Main.py",  NULL,       NULL,       0,            True,         -1 },
+  { "google-chrome",
+                NULL,       NULL,       1<<1,         False,        -1 },
   { "google-chrome-unstable",
                 NULL,       NULL,       1<<1,         False,        -1 },
   { "Linuxdcpp",NULL,       NULL,       1<<0,         False,        -1 },
   { "Vlc",      NULL,       NULL,       1<<2,         True,         -1 },
+  { "urxvt",    NULL,       NULL,       0,            True,         -1 },
   { "Lyx",      NULL,       NULL,       1<<3,         False,        -1 }
 };
 
@@ -48,9 +57,9 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "<float>",      NULL },    /* no layout function means floating behavior */
-  { "<tiled>",      tile },    /* first entry is default */
-	{ "<full>",      monocle },
+	{ "fl",      NULL },    /* no layout function means floating behavior */
+  { "ti",      tile },    /* first entry is default */
+	{ "fu",      monocle },
 };
 
 /* key definitions */
@@ -69,7 +78,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, NULL };
 static const char *termcmd[]  = { "urxvt", NULL };
 static const char *fmcmd[] = {"urxvt", "-e", "/bin/sh", "-c", "ranger", NULL};
-static const char *chromecmd[] = {"google-chrome", NULL};
+static const char *chromecmd[] = {"firefox", NULL};
 static const char *dccmd[] = {"linuxdcpp", NULL};
 
 static Key keys[] = {

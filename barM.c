@@ -86,15 +86,15 @@ static const char * date(void){
 /* Returns a string that contains the amount of free and available ram in megabytes*/
 static const char * ram(void){
   FILE *meminfo = fopen("/proc/meminfo", "r");
-  int totalMemory = 0, freeMem = 0;
+  int totalMemory = 0, aMem = 0;
   char buff[256];
   while(fgets(buff, sizeof(buff), meminfo)) {
     int ramKB;
-    if (sscanf(buff, "MemFree: %d kB", &freeMem) == 1) freeMem /= 1024;
+    if (sscanf(buff, "MemAvailable: %d kB", &aMem) == 1) aMem /= 1024;
     if (sscanf(buff, "MemTotal: %d kB", &totalMemory) == 1) totalMemory /= 1024;
   }
   static char ram[MAXSTR];
-  snprintf(ram, sizeof(ram), "%dM %dM", totalMemory-freeMem, totalMemory);
+  snprintf(ram, sizeof(ram), "%dM %dM", totalMemory-aMem, totalMemory);
   return ram;
 }
 

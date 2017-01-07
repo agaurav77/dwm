@@ -2,3 +2,4 @@ config.h
 *.diff
 *.o
 dwm
+barM

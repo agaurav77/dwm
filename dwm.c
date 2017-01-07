@@ -1144,8 +1144,8 @@ manage(Window w, XWindowAttributes *wa) {
 
 	/* randomise floating windows */
 	srand(time(NULL));
-	c->x = (50+(rand()%(1001-100))*(c->mon->mw - WIDTH(c)))/1000;
-	c->y = (50+(rand()%(1001-100))*(c->mon->mh - HEIGHT(c)))/1000;
+	c->x = (100+(rand()%(1001-200))*(c->mon->mw - WIDTH(c)))/1000;
+	c->y = (100+(rand()%(1001-200))*(c->mon->mh - HEIGHT(c)))/1000;
 
 	if(c->x + WIDTH(c) > c->mon->mx + c->mon->mw)
 		c->x = c->mon->mx + c->mon->mw - WIDTH(c);
