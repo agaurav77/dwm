@@ -17,6 +17,7 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
 };
 static const char dmenufont[] = "Cantarell:size=9";
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int gappx     = 3;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
