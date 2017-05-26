@@ -2,9 +2,15 @@
 
 /* appearance */
 static const char *fonts[] = {
-    "Cantarell:size=9"
-    "Carrois Gothic:size=11",
-    "Lucida Grande:size=8",
+    "AurulentSansMono Nerd Font:style=Regular:size=9",
+    "ProggyCleanTT Nerd Font:style=Book:size=12",
+    "Iosevka Nerd Font:style=Medium:size=10",
+    "Estrangelo Edessa:style=Regular:size=12",
+    "Berthold Akzidenz Grotesk:style=Medium:size=9",
+    "Slate Pro:style=Regular:size=12",
+    "NanumGothicCoding:size=11",
+    "Quattrocento Sans:style=Regular:size=12",
+    "ABeeZee:size=10",
     "Inconsolata:size=9",
     "VL Gothic:size=10.5",  
     "WenQuanYi Micro Hei:size=10.5",
@@ -12,23 +18,23 @@ static const char *fonts[] = {
 #define NUMCOLORS         2
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
   // border     foreground   background
-  { "#2d2d2d", "#ffffff",   "#433a24" },  // normal
-  { "#4d4d4d", "#ffffff",   "#534a33" },  // selected
+  { "#2d2d2d", "#ffffff",   "#111111" },  // normal
+  { "#4d4d4d", "#ffffff",   "#222222" },  // selected
 };
-static const char dmenufont[] = "Cantarell:size=9";
+static const char dmenufont[] = "AurulentSansMono Nerd Font:style=Regular:size=9";
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappx     = 3;        /* gap pixel between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, 0: display systray on the last monitor*/
-static const int showsystray        = 1;        /* 0 means no systray */
+static const int showsystray        = 0;        /* 0 means no systray */
 
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-static const char *tags[] = {"dwld", "www", "vid", "dev", "<3"};
+static const char *tags[] = {"\ue795 tmux", "\uf268 net", "\uf40e dev", "\uf1c5 files", "\u2665"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -36,19 +42,41 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            False,        -1 },
+	/*
+  { "Gimp",     NULL,       NULL,       0,            False,        -1 },
+
   { "Firefox",  NULL,       NULL,       1<<1,         False,        -1 },
+
   { "Navigator", 
                 NULL,       NULL,       1<<1,         False,        -1 },
-  { "Main.py",  NULL,       NULL,       0,            True,         -1 },
-  { "google-chrome",
+
+  { "Main.py",  NULL,       NULL,       0,            True,         -1 },*/
+
+  { "Google-chrome",
                 NULL,       NULL,       1<<1,         False,        -1 },
-  { "google-chrome-unstable",
+
+  { "Google-chrome-stable",
                 NULL,       NULL,       1<<1,         False,        -1 },
-  { "Linuxdcpp",NULL,       NULL,       1<<0,         False,        -1 },
-  { "Vlc",      NULL,       NULL,       1<<2,         True,         -1 },
+
+  { "Google-chrome-unstable",
+                NULL,       NULL,       1<<1,         False,        -1 },
+
+  /*
+  { "Linuxdcpp",
+                NULL,       NULL,       1<<0,         False,        -1 },*/
+
+  { "Vlc",      NULL,       NULL,       1<<4,         True,         -1 },
+
+  { "Pcmanfm",  NULL,       NULL,       1<<3,         False,        -1 },
+
+  { "gnome-terminal-server",
+                NULL,       NULL,       1<<0,         False,        -1 },
+
+  /*
   { "urxvt",    NULL,       NULL,       0,            True,         -1 },
-  { "Lyx",      NULL,       NULL,       1<<3,         False,        -1 }
+
+  { "Lyx",      NULL,       NULL,       1<<3,         False,        -1 }*/
+
 };
 
 /* layout(s) */
@@ -58,8 +86,8 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "fl",      NULL },    /* no layout function means floating behavior */
-  { "ti",      tile },    /* first entry is default */
+	{ "ti",      tile },    /* no layout function means floating behavior */
+  { "fl",      NULL },    /* first entry is default */
 	{ "fu",      monocle },
 };
 
@@ -98,8 +126,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ Mod4Mask,                     XK_space,  spawn,          {.v = dmenucmd} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
@@ -115,6 +143,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_3,                      2)
 	TAGKEYS(                        XK_4,                      3)
 	TAGKEYS(                        XK_5,                      4)
+	TAGKEYS(                        XK_6,                      5)
+	TAGKEYS(                        XK_7,                      6)
+	TAGKEYS(                        XK_8,                      7)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
